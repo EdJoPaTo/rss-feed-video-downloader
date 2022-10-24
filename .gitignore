@@ -1,8 +1,12 @@
 .vscode
 
+# State of what was downloaded already
 downloaded.txt
 
-*.jpg
+# Result files
 *.mp4
+
+# Temporary files while download
+*.jpg
 *.part
 *.ytdl
