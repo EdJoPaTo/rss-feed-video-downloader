@@ -1,0 +1,12 @@
+.*
+*.md
+**/*.test.*
+**/test.*
+Dockerfile
+
+downloaded.txt
+
+*.jpg
+*.mp4
+*.part
+*.ytdl
