@@ -41,12 +41,12 @@ async function doRun() {
     }
   }
 
-  console.log("\n\n");
+  console.log();
   console.log("download done. Going to sleep for a while");
 }
 
 async function doDownload(link: string): Promise<void> {
-  console.log("\n\n");
+  console.log("\n");
   console.log("begin download of", link);
 
   const p = Deno.run({
