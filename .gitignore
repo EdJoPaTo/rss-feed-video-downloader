@@ -1,7 +1,7 @@
 .vscode
 
 # State of what was downloaded already
-downloaded.txt
+.downloaded.txt
 
 # Result files
 *.mp4

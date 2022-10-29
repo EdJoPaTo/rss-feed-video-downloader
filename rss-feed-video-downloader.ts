@@ -22,7 +22,7 @@ async function doRun() {
   ): o is string => Boolean(o));
   console.log("rss has", links.length);
 
-  const downloadedContent = await Deno.readTextFile("downloaded.txt").catch(
+  const downloadedContent = await Deno.readTextFile(".downloaded.txt").catch(
     () => "",
   );
   const downloaded = new Set(downloadedContent.split("\n").filter(Boolean));
@@ -70,13 +70,13 @@ async function doDownload(link: string): Promise<void> {
 }
 
 async function markDownloaded(link: string): Promise<void> {
-  const downloadedContent = await Deno.readTextFile("downloaded.txt").catch(
+  const downloadedContent = await Deno.readTextFile(".downloaded.txt").catch(
     () => "",
   );
   const downloaded = downloadedContent.split("\n").filter(Boolean);
   downloaded.push(link);
   await Deno.writeTextFile(
-    "downloaded.txt",
+    ".downloaded.txt",
     downloaded.sort().map((o) => `${o}\n`).join(""),
   );
 }
