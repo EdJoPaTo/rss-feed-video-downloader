@@ -1,4 +1,4 @@
-FROM docker.io/denoland/deno:1.27.0
+FROM docker.io/denoland/deno:1.28.2
 RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list \
 	&& apt-get update \
     && apt-get upgrade -y \
