@@ -3,7 +3,7 @@ name: Build container
 on:
   push:
   pull_request:
-  # Build regularly in order to have up to date packages in the edge image
+  # Build regularly in order to have up to date base image & packages in the edge image
   schedule:
     - cron: '42 2 * * 6' # weekly on Saturday 2:42 UTC
 
@@ -35,6 +35,7 @@ jobs:
 
       - uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64, linux/arm64/v8
           push: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
