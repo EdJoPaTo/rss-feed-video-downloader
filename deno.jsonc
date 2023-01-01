@@ -1,5 +1,6 @@
 {
   // https://deno.land/manual/getting_started/configuration_file
+  "lock": false,
   "compilerOptions": {
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
