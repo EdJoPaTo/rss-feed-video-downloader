@@ -18,7 +18,7 @@ RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/
 
 WORKDIR /app
 
-COPY deno.jsonc *.ts ./
+COPY . ./
 RUN deno cache *.ts
 
 VOLUME /data
