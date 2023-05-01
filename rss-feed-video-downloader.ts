@@ -49,9 +49,8 @@ async function doDownload(link: string): Promise<void> {
   console.log("\n");
   console.log("begin download of", link);
 
-  const p = Deno.run({
-    cmd: [
-      "nice",
+  const p = new Deno.Command("nice", {
+    args: [
       "yt-dlp",
       "--prefer-free-formats",
       "--embed-thumbnail",
@@ -60,8 +59,8 @@ async function doDownload(link: string): Promise<void> {
       "--no-progress",
       link,
     ],
-  });
-  const status = await p.status();
+  }).spawn();
+  const status = await p.status;
   if (!status.success) {
     throw new Error("yt-dlp was not successful");
   }
