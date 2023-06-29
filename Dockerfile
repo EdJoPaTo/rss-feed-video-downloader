@@ -1,6 +1,6 @@
 FROM docker.io/lukechannings/deno:latest AS deno
 
-FROM docker.io/library/debian:bullseye-slim
+FROM docker.io/library/debian:bookworm-slim
 
 COPY --from=deno /usr/bin/deno /usr/local/bin/
 RUN useradd --uid 1993 --user-group deno \
@@ -9,8 +9,7 @@ RUN useradd --uid 1993 --user-group deno \
 ENV DENO_DIR /deno-dir/
 ENV DENO_INSTALL_ROOT /usr/local
 
-RUN echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list \
-	&& apt-get update \
+RUN apt-get update \
 	&& apt-get upgrade -y \
 	&& apt-get install -y yt-dlp \
 	&& apt-get clean \
