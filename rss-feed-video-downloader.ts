@@ -33,7 +33,7 @@ async function doRun() {
     try {
       // deno-lint-ignore no-await-in-loop
       await doDownload(link);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error(
         "download failed",
         error instanceof Error ? error.message : error,
