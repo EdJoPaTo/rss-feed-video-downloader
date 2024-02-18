@@ -1,4 +1,7 @@
 FROM docker.io/lukechannings/deno:latest AS builder
+RUN apt-get update \
+	&& apt-get upgrade -y \
+	&& apt-get install -y unzip
 WORKDIR /app
 COPY . ./
 RUN deno compile \
