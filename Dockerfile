@@ -1,4 +1,4 @@
-FROM docker.io/lukechannings/deno:latest AS builder
+FROM docker.io/denoland/deno:latest AS builder
 RUN apt-get update \
 	&& apt-get upgrade -y \
 	&& apt-get install -y unzip
