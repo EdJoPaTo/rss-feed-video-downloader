@@ -1,6 +1,7 @@
 import { parseFeed } from "jsr:@mikaelporttila/rss@1";
 
 const RSS_FEED = getEnv("RSS_FEED");
+const INTERVAL_MINUTES = getIntervalMinutes();
 
 function getEnv(key: string): string {
 	const value = Deno.env.get(key);
@@ -10,8 +11,19 @@ function getEnv(key: string): string {
 	return value;
 }
 
+function getIntervalMinutes(): number {
+	const value = Number(Deno.env.get("INTERVAL_MINUTES"));
+	if (Number.isFinite(value) && value >= 0 && value <= 12000) {
+		return value;
+	}
+
+	return 95;
+}
+
 await doRun();
-setInterval(doRun, 1000 * 60 * 95); // every 95 minutes
+if (INTERVAL_MINUTES > 0) {
+	setInterval(doRun, 1000 * 60 * INTERVAL_MINUTES); // every n minutes
+}
 
 async function doRun() {
 	const response = await fetch(RSS_FEED);
@@ -42,7 +54,12 @@ async function doRun() {
 	}
 
 	console.log();
-	console.log("download done. Going to sleep for a while");
+	console.log(
+		"download done.",
+		INTERVAL_MINUTES > 0
+			? `Going to sleep for <${INTERVAL_MINUTES} minutes…`
+			: "Everything done. Exitting…",
+	);
 }
 
 async function doDownload(link: string): Promise<void> {
