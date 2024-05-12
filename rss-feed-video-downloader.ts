@@ -1,4 +1,4 @@
-import { parseFeed } from "https://deno.land/x/rss@1.0.2/mod.ts";
+import { parseFeed } from "jsr:@mikaelporttila/rss@1";
 
 const RSS_FEED = getEnv("RSS_FEED");
 
