@@ -5,7 +5,7 @@ RUN apt-get update \
 WORKDIR /app
 COPY . ./
 RUN deno compile \
-	--allow-env=RSS_FEED \
+	--allow-env=INTERVAL_MINUTES,RSS_FEED \
 	--allow-net \
 	--allow-read=/data \
 	--allow-run \
