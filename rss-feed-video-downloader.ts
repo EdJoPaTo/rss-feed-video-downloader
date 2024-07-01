@@ -1,7 +1,12 @@
 import { parseFeed } from "jsr:@mikaelporttila/rss@1";
 
-const RSS_FEED = getEnv("RSS_FEED");
+const RSS_FEEDS = getEnv("RSS_FEED")
+	.split(/\s+/g)
+	.filter(Boolean);
 const INTERVAL_MINUTES = getIntervalMinutes();
+
+console.log("RSS feeds:", RSS_FEEDS.length, RSS_FEEDS);
+console.log("INTERVAL_MINUTES:", INTERVAL_MINUTES);
 
 function getEnv(key: string): string {
 	const value = Deno.env.get(key);
@@ -26,13 +31,18 @@ if (INTERVAL_MINUTES > 0) {
 }
 
 async function doRun() {
-	const response = await fetch(RSS_FEED);
-	const text = await response.text();
-	const { entries } = await parseFeed(text);
-	const links = entries.flatMap((o) => o.links).map((o) => o.href).filter((
-		o,
-	): o is string => Boolean(o));
-	console.log("rss has", links.length);
+	console.log("start run...");
+
+	const links: string[] = [];
+	for (const feedUrl of RSS_FEEDS) {
+		console.log("get", feedUrl);
+		// deno-lint-ignore no-await-in-loop
+		const feedLinks = await getFeedLinks(feedUrl);
+		console.log("got", feedLinks.length);
+		links.push(...feedLinks);
+	}
+
+	console.log("got", links.length, "in total");
 
 	const downloadedContent = await Deno.readTextFile(".downloaded.txt").catch(
 		() => "",
@@ -60,6 +70,16 @@ async function doRun() {
 			? `Going to sleep for <${INTERVAL_MINUTES} minutes…`
 			: "Everything done. Exitting…",
 	);
+}
+
+async function getFeedLinks(feedUrl: string) {
+	const response = await fetch(feedUrl);
+	const text = await response.text();
+	const { entries } = await parseFeed(text);
+	return entries
+		.flatMap((o) => o.links)
+		.map((o) => o.href)
+		.filter((o): o is string => Boolean(o));
 }
 
 async function doDownload(link: string): Promise<void> {

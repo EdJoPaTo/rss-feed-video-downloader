@@ -5,7 +5,8 @@ Downloads an RSS feed and tries to yt-dlp every entry
 ## Usage
 
 - Point the container `/data` mount to a directory you want to use.
-- Supply the `RSS_FEED` environment variable.
+- Supply the `RSS_FEED` environment variable. Can contain multiple space (`\s`)
+  separated feed URLs. (Escape spaces in URLs with %20 like URL decoding does.)
 - (optional) set `INTERVAL_MINUTES` environment variable. `0` to disable
   interval. Defaults to 95 min.
 - (optional) Sync the videos. Personally I use syncthing for this.
