@@ -5,8 +5,3 @@
 
 # Result files
 *.mp4
-
-# Temporary files while download
-*.jpg
-*.part
-*.ytdl

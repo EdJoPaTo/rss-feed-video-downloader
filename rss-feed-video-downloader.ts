@@ -74,6 +74,7 @@ async function doDownload(link: string): Promise<void> {
 			"--embed-metadata",
 			"--embed-chapters",
 			"--no-progress",
+			"--paths=temp:/tmp/yt-dlp",
 			link,
 		],
 	}).spawn();

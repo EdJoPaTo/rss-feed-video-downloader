@@ -4,7 +4,4 @@
 **/test.*
 Dockerfile
 
-*.jpg
 *.mp4
-*.part
-*.ytdl

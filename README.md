@@ -8,6 +8,5 @@ Downloads an RSS feed and tries to yt-dlp every entry
 - Supply the `RSS_FEED` environment variable.
 - (optional) set `INTERVAL_MINUTES` environment variable. `0` to disable
   interval. Defaults to 95 min.
-- (optional) Sync the videos. Personally I use syncthing for this. You should
-  ignore some files from sync, check the [.gitignore](.gitignore)
+- (optional) Sync the videos. Personally I use syncthing for this.
 - Enjoy!
