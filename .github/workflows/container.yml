@@ -7,7 +7,7 @@ on:
     tags:
       - v*
   workflow_dispatch:
-  # Build regularly in order to have up to date base image & packages in the edge image
+  # Build regularly in order to have up to date base image in the edge image
   schedule:
     - cron: '42 2 * * 6' # weekly on Saturday 2:42 UTC
 
