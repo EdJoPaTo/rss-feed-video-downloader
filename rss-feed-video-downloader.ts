@@ -4,9 +4,11 @@ const RSS_FEEDS = getEnv("RSS_FEED")
 	.split(/\s+/g)
 	.filter(Boolean);
 const INTERVAL_MINUTES = getIntervalMinutes();
+const YT_DLP_FORMAT = Deno.env.get("YT_DLP_FORMAT");
 
 console.log("RSS feeds:", RSS_FEEDS.length, RSS_FEEDS);
 console.log("INTERVAL_MINUTES:", INTERVAL_MINUTES);
+console.log("YT_DLP_FORMAT", YT_DLP_FORMAT);
 
 function getEnv(key: string): string {
 	const value = Deno.env.get(key);
@@ -95,6 +97,7 @@ async function doDownload(link: string): Promise<void> {
 			"--embed-chapters",
 			"--no-progress",
 			"--paths=temp:/tmp/yt-dlp",
+			...(YT_DLP_FORMAT ? ["--format=" + YT_DLP_FORMAT] : []),
 			link,
 		],
 	}).spawn();
