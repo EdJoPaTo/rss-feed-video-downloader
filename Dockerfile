@@ -13,7 +13,7 @@ RUN deno compile \
 	rss-feed-video-downloader.ts
 
 
-FROM docker.io/library/debian:bookworm-slim
+FROM docker.io/library/debian:bookworm-slim AS final
 RUN apt-get update \
 	&& apt-get upgrade -y \
 	&& apt-get install -y yt-dlp \
@@ -24,5 +24,4 @@ VOLUME /data
 WORKDIR /data
 
 COPY --from=builder /app/rss-feed-video-downloader /usr/local/bin/
-
 CMD ["rss-feed-video-downloader"]
