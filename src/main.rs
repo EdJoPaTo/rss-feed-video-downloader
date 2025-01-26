@@ -64,7 +64,7 @@ fn main() {
             &link,
         );
     }
-    println!("\n\nEverything done. Exitting…");
+    println!("\n\nEverything done. Exiting…");
 }
 
 fn get_feed(url: &str) -> anyhow::Result<rss::Channel> {
