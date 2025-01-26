@@ -1,27 +1,27 @@
-FROM docker.io/denoland/deno:latest AS builder
-RUN apt-get update \
-	&& apt-get upgrade -y \
-	&& apt-get install -y unzip
-WORKDIR /app
+FROM docker.io/library/rust:1-alpine AS builder
+WORKDIR /build
+RUN apk upgrade --no-cache \
+	&& apk add --no-cache musl-dev
+
+COPY Cargo.toml Cargo.lock ./
+
+# cargo needs a dummy src/lib.rs to compile the dependencies
+RUN mkdir -p src \
+	&& touch src/lib.rs \
+	&& cargo fetch --locked \
+	&& cargo build --release --offline \
+	&& rm -rf src
+
 COPY . ./
-RUN deno compile \
-	--allow-env=RSS_FEED,INTERVAL_MINUTES,YT_DLP_FORMAT,YT_DLP_FORMAT_SORT \
-	--allow-net \
-	--allow-read=/data \
-	--allow-run \
-	--allow-write=/data \
-	rss-feed-video-downloader.ts
+RUN cargo build --release --frozen --offline
 
 
-FROM docker.io/library/debian:bookworm-slim AS final
-RUN apt-get update \
-	&& apt-get upgrade -y \
-	&& apt-get install -y yt-dlp \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
+FROM docker.io/library/alpine:3 AS final
+RUN apk upgrade --no-cache \
+	&& apk add --no-cache yt-dlp
 
 VOLUME /data
 WORKDIR /data
 
-COPY --from=builder /app/rss-feed-video-downloader /usr/local/bin/
-CMD ["rss-feed-video-downloader"]
+COPY --from=builder /build/target/release/rss-feed-video-downloader /usr/local/bin/
+ENTRYPOINT ["rss-feed-video-downloader"]

@@ -1,4 +1,5 @@
 .vscode
+/target
 
 # State of what was downloaded already
 .downloaded.txt

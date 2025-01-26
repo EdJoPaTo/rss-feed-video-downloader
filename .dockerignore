@@ -1,7 +1,8 @@
 .*
 *.md
-**/*.test.*
-**/test.*
+/target
 Dockerfile
+rustfmt.toml
 
 *.mp4
+.downloaded.txt
