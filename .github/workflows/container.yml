@@ -2,10 +2,6 @@ name: Build container
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - v*
   workflow_dispatch:
   # Build regularly in order to have up to date base image in the edge image
   schedule:
@@ -47,7 +43,7 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64, linux/arm64/v8
-          push: true
+          push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
