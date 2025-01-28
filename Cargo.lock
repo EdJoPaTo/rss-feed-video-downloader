@@ -217,9 +217,9 @@ dependencies = [
 
 [[package]]
 name = "rustls-pki-types"
-version = "1.10.1"
+version = "1.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2bf47e6ff922db3825eb750c4e2ff784c6ff8fb9e13046ef6a1d1c5401b0b37"
+checksum = "917ce264624a4b4db1c364dcc35bfca9ded014d0a958cd47ad3e960e988ea51c"
 
 [[package]]
 name = "rustls-webpki"
@@ -258,15 +258,14 @@ checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
 name = "ureq"
-version = "3.0.0"
+version = "3.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e860613aec8c8643c53fb4a3ea3bed801ac09d982b75cb5a1c579e410ef043c2"
+checksum = "aa6a209bb4b8d5903579fc4f8cd12ce5594f1ed6b735bf290ab5e2bdb3e70013"
 dependencies = [
  "base64",
  "cc",
  "flate2",
  "log",
- "once_cell",
  "percent-encoding",
  "rustls",
  "rustls-pemfile",
@@ -278,9 +277,9 @@ dependencies = [
 
 [[package]]
 name = "ureq-proto"
-version = "0.2.4"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "319fa2a136b0a13deb093ce09407b39918ecceb68abfc688d9bf9353cf840b94"
+checksum = "2c51fe73e1d8c4e06bb2698286f7e7453c6fc90528d6d2e7fc36bb4e87fe09b1"
 dependencies = [
  "base64",
  "http",
